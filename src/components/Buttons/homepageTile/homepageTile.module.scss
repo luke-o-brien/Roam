@@ -1,3 +1,5 @@
+@use 'styles/typography';
+
 .ButtonContainer {
   min-width: 140px;
   height: 83px;
@@ -7,18 +9,22 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   box-shadow: 1cap;
   border: none;
   box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
 
 .ButtonText {
+  @include typography.bodyOne;
   color: var(--appColour);
-    text-decoration: none;
+  text-decoration: none;
+
 }
 
 .Icon {
-  color: var(--appColour)
+  color: var(--appColour);
+  font-size: 18px;
 }
 
 .Link {
