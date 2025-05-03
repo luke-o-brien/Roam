@@ -31,12 +31,12 @@ export const StatusCard: React.FC<StatusCardProps> = ({
   console.log(statusData);
   return (
     <div className={styles.statusCard}>
+      <div
+        className={styles.ColourIndicator}
+        style={{ backgroundColor: `var(--${id})` }}
+      ></div>
       <div className={styles.MainContent}>
-        <div className={styles.Leftcontainer}>
-          <div
-            className={styles.ColourIndicator}
-            style={{ backgroundColor: `var(--${id})` }}
-          ></div>
+        <div className={styles.TopContainer}>
           <div className={styles.CardInfoContainer}>
             <p>{name}</p>
             <div className={styles.StatusSeverityDescription}>
@@ -47,17 +47,20 @@ export const StatusCard: React.FC<StatusCardProps> = ({
               ))}
             </div>
           </div>
+          <button
+            className={styles.DetailsButton}
+            onClick={() => setVisibleDetails(!visibleDetails)}
+          >
+            View Details
+          </button>
         </div>
-        <button className={styles.DetailsButton} onClick={() => setVisibleDetails(!visibleDetails)}>
-          View details
-        </button>
-      </div>
-
-      <div className={styles.ExpandableContent}>
-        {visibleDetails &&
-          lineStatuses.map((status, idx) => (
-            <div key={idx}className={styles.DetailsText}>{status.reason.split(":").slice(1).join(":")}</div>
+        {visibleDetails && <div className={styles.ExpandableContent}>
+          {lineStatuses.map((status, idx) => (
+            <div key={idx} className={styles.DetailsText}>
+              {status.reason.split(":").slice(1).join(":")}
+            </div>
           ))}
+        </div>}
       </div>
     </div>
   );

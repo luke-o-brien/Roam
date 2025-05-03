@@ -1,0 +1,23 @@
+@use 'styles/typography';
+
+.Header {
+  background-color: var(--appColour);
+  height: 32px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+}
+
+.PageName {
+  color: #ffffff;
+  @include typography.BodyOne
+}
+
+.MenuButton {
+  border: none;
+  background: transparent;
+  color: #ffffff;
+
+}

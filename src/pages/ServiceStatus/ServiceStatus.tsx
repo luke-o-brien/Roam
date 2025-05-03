@@ -52,7 +52,6 @@ export const ServiceStatus: React.FC = () => {
       {filteredLines?.length === 0 && <p>Good service on all lines</p>}
       {filteredLines.length > 0 && (
         <>
-          <p>Service status page</p>
           {filteredLines.map((line, idx) => (
             <StatusCard key={idx} name={line.name} id={line.id} lineStatuses={line.lineStatuses} />
           ))}
