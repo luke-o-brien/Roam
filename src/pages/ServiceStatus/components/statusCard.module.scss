@@ -1,14 +1,64 @@
+@use 'styles/typography';
+
 .statusCard {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   gap: 8px;
   padding: 5px 5px;
 }
 
+.MainContent {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: space-between;
+  width: 100%;
+}
 .ColourIndicator {
-  height: 42px;
+  height: 50px;
   width: 8px;
   border-radius: 2px;
+}
+
+.CardInfoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.LineStatusText {
+  @include typography.BodyOne;
+}
+
+.StatusSeverityDescription {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.ExpandableContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px
+}
+
+.DetailsText {
+  @include typography.subtitleOne;
+  text-align: left;
+}
+
+.Leftcontainer {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.DetailsButton {
+  border: none;
+  height: auto;
+  background-color: transparent;
 }

@@ -16,7 +16,7 @@
 }
 
 .ButtonText {
-  @include typography.bodyOne;
+  @include typography.TitleOne;
   color: var(--appColour);
   text-decoration: none;
 

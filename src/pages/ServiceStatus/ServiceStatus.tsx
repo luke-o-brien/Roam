@@ -41,9 +41,10 @@ export const ServiceStatus: React.FC = () => {
 
   const filteredLines =
     data?.filter((line) =>
-      line.lineStatuses.some((status) => status.statusSeverity === 10)
+      !line.lineStatuses.some((status) => status.statusSeverity === 10)
     ) ?? [];
 
+  console.log(filteredLines)
   return (
     <>
       {isPending && <p>Loading...</p>}
@@ -53,7 +54,7 @@ export const ServiceStatus: React.FC = () => {
         <>
           <p>Service status page</p>
           {filteredLines.map((line, idx) => (
-            <StatusCard key={idx} name={line.name} id={line.id} />
+            <StatusCard key={idx} name={line.name} id={line.id} lineStatuses={line.lineStatuses} />
           ))}
         </>
       )}
