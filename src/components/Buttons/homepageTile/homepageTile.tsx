@@ -6,7 +6,7 @@ import { ReactNode } from "react";
 type HomepageTileProps = {
   buttonText: string;
   icon: ReactNode;
-  url?: string;
+  url: string;
 };
 
 export const HomepageTile: React.FC<HomepageTileProps> = ({
