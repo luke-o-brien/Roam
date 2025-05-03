@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { StatusCard } from "./components/statusCard";
 
 export const ServiceStatus: React.FC = () => {
   const apiVariables = {
@@ -25,11 +26,11 @@ export const ServiceStatus: React.FC = () => {
     queryFn: () => getServiceData(mode),
   });
 
-  // only filter if data exists
-  const filteredLines = data?.filter(
-    (line) => !line.lineStatuses.some((status) => status.statusSeverity === 10)
+  const filteredLines = data?.filter((line) =>
+    line.lineStatuses.some((status) => status.statusSeverity === 10)
   );
 
+  console.log(filteredLines);
   return (
     <>
       {isPending && <p>Loading...</p>}
@@ -38,8 +39,8 @@ export const ServiceStatus: React.FC = () => {
       {filteredLines?.length > 0 && (
         <>
           <p>Service status page</p>
-          {filteredLines.map((line) => (
-            <p key={line.id}>{line.name}</p>
+          {filteredLines.map((line, idx) => (
+            <StatusCard key={idx} name={line.name} id={line.id} />
           ))}
         </>
       )}
