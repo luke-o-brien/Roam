@@ -28,7 +28,6 @@ export const StatusCard: React.FC<StatusCardProps> = ({
     return acc;
   }, []);
 
-  console.log(statusData);
   return (
     <div className={styles.statusCard}>
       <div

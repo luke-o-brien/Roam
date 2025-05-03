@@ -1,0 +1,30 @@
+.TabButtonActive {
+  background-color: #ffffff;
+  color: var(--appColour);
+  border: none;
+  width: 32%;
+  height: 40px;
+  border-radius: 4px 4px 0px 0px;
+  border: 1px solid #ffffff;
+  border-bottom: none;
+}
+
+.TabButton {
+  background-color: var(--appColour);
+  color: #ffffff;
+  border: none;
+  height: 40px;
+  width: 32%;
+  border-radius: 4px 4px 0px 0px;
+  border: 1px solid #ffffff;
+  border-bottom: none;
+}
+
+.TabMenu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0 4px;
+  width: 100%;
+  background-color: var(--appColour);
+}

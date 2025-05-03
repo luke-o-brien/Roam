@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { StatusCard } from "./components/statusCard";
+import { TabMenu } from "./components/TabMenu/TabMenu";
 
 type LineStatus = {
   statusSeverity: number;
@@ -22,12 +23,14 @@ export const ServiceStatus: React.FC = () => {
     Bus: "bus",
   };
 
-  const [mode] = useState(apiVariables.TFLLines);
+  const [mode, setMode] = useState('TFLLines');
 
   async function getServiceData(mode: string): Promise<Line[]> {
     const response = await fetch(
-      `https://api.tfl.gov.uk/line/mode/${mode}/status/`
+      `https://api.tfl.gov.uk/line/mode/${apiVariables[mode]}/status/`
     );
+    console.log(`https://api.tfl.gov.uk/line/mode/${apiVariables[mode]}/status/`);
+    console.log(response)
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
@@ -47,6 +50,7 @@ export const ServiceStatus: React.FC = () => {
   console.log(filteredLines)
   return (
     <>
+      <TabMenu setMode={setMode} mode={mode} />
       {isPending && <p>Loading...</p>}
       {isError && <p>Error fetching data</p>}
       {filteredLines?.length === 0 && <p>Good service on all lines</p>}
