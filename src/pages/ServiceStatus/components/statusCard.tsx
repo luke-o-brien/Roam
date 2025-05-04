@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./statusCard.module.scss";
+import { motion } from "motion/react";
 
 type LineStatus = {
   statusSeverity: number;
@@ -17,6 +18,8 @@ export const StatusCard: React.FC<StatusCardProps> = ({
   name,
   id,
   lineStatuses,
+  setActiveLine,
+  activeLine,
 }) => {
   const [visibleDetails, setVisibleDetails] = useState(false);
 
@@ -48,18 +51,30 @@ export const StatusCard: React.FC<StatusCardProps> = ({
           </div>
           <button
             className={styles.DetailsButton}
-            onClick={() => setVisibleDetails(!visibleDetails)}
+            onClick={() => {
+              setVisibleDetails(!visibleDetails);
+              setActiveLine(id);
+            }}
           >
             View Details
           </button>
         </div>
-        {visibleDetails && <div className={styles.ExpandableContent}>
+
+        <motion.div
+          className={styles.ExpandableContent}
+          layout
+          initial={{height: 0}}
+          animate={{
+            height: visibleDetails && activeLine === id ? "auto" : 0,
+          }}
+          transition={{ duration: 0.7, ease: "easeInOut" }}
+        >
           {lineStatuses.map((status, idx) => (
             <div key={idx} className={styles.DetailsText}>
               {status.reason.split(":").slice(1).join(":")}
             </div>
           ))}
-        </div>}
+        </motion.div>
       </div>
     </div>
   );
