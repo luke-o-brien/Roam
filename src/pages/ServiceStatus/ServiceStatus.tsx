@@ -25,7 +25,7 @@ export const ServiceStatus: React.FC = () => {
 
   const [mode, setMode] = useState("TFLLines");
   const [activeLine, setActiveLine] = useState("");
-  const [searchTerm, setSearchTerm] = useState("")
+  const [searchTerm, setSearchTerm] = useState("");
 
   const { data, isPending, isError } = useQuery({
     queryKey: ["getServiceData", mode],
@@ -38,29 +38,39 @@ export const ServiceStatus: React.FC = () => {
     data?.filter(
       (line) =>
         !line.lineStatuses.some((status) => status.statusSeverity === 10) &&
-        (!searchTerm || line.name.toLowerCase().includes(searchTerm.toLowerCase()))
+        (!searchTerm ||
+          line.name.toLowerCase().includes(searchTerm.toLowerCase()))
     ) ?? [];
 
   return (
     <>
       <TabMenu setMode={setMode} mode={mode} />
+      {mode === "Bus" && (
+        <div className={styles.SearchField}>
+          <label className={styles.SearchLable}>Search for a route</label>
+          <input
+            className={styles.SearchBar}
+            type="text"
+            onChange={(e) => setSearchTerm(e.target.value)}
+          ></input>
+        </div>
+      )}
       {isPending && <p>Loading...</p>}
       {isError && <p>Error fetching data</p>}
-      {(filteredLines?.length === 0 && mode !== 'Bus') && !isPending && !isError && (
-        <p>Good service on all lines</p>
-      )}
+      {filteredLines?.length === 0 &&
+        mode !== "Bus" &&
+        !isPending &&
+        !isError && (
+          <div>
+            {mode === "River" ? (
+              <p>All River services are running with a good service</p>
+            ) : (
+              <p>Good service on all lines</p>
+            )}
+          </div>
+        )}
       {(mode === "Bus" || filteredLines.length > 0) && (
         <div className={styles.CardContainer}>
-          {mode === "Bus" && (
-            <div className={styles.SearchField}>
-              <label className={styles.SearchLable}>Search for a route</label>
-              <input
-                className={styles.SearchBar}
-                type="text"
-                onChange={(e) => setSearchTerm(e.target.value)}
-              ></input>
-            </div>
-          )}
           <div ref={cardsRef}>
             {filteredLines.map((line, idx) => (
               <StatusCard
@@ -78,12 +88,16 @@ export const ServiceStatus: React.FC = () => {
             className={styles.ServiceMessage}
             style={{ height: `${bottomBannerHeight}px`, background: "#f8f8f8" }}
           >
-            {mode === "River" ? (
-              <p>Good Service on all other river services</p>
-            ) : mode === "Bus" ? (
-              <p>Good Service on all other routes</p>
+            {!isPending ? (
+              mode === "River" ? (
+                <p>Good Service on all other river services</p>
+              ) : mode === "Bus" ? (
+                <p>Good Service on all other routes</p>
+              ) : (
+                <p>Good service on all other lines </p>
+              )
             ) : (
-              <p>Good service on all other lines </p>
+              <></>
             )}
           </div>
         </div>
