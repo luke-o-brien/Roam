@@ -20,6 +20,7 @@ export const StatusCard: React.FC<StatusCardProps> = ({
   lineStatuses,
   setActiveLine,
   activeLine,
+  mode
 }) => {
   const [visibleDetails, setVisibleDetails] = useState(false);
 
@@ -35,7 +36,7 @@ export const StatusCard: React.FC<StatusCardProps> = ({
     <div className={styles.statusCard}>
       <div
         className={styles.ColourIndicator}
-        style={{ backgroundColor: `var(--${id})` }}
+        style={mode === 'Bus' ? { backgroundColor: `var(--bus)`} : { backgroundColor: `var(--${id})` }}
       ></div>
       <div className={styles.MainContent}>
         <div className={styles.TopContainer}>
@@ -52,18 +53,19 @@ export const StatusCard: React.FC<StatusCardProps> = ({
           <button
             className={styles.DetailsButton}
             onClick={() => {
-              setVisibleDetails(!visibleDetails);
-              setActiveLine(id);
+              setVisibleDetails(activeLine === id ? false : true);
+              setActiveLine(activeLine === id ? false : id);
             }}
           >
-            View Details
+            {visibleDetails && activeLine === id ? `Hide` :
+            `View Details`}
           </button>
         </div>
 
         <motion.div
           className={styles.ExpandableContent}
           layout
-          initial={{height: 0}}
+          initial={{ height: 0 }}
           animate={{
             height: visibleDetails && activeLine === id ? "auto" : 0,
           }}
