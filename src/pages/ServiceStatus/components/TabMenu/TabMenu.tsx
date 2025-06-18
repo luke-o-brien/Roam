@@ -28,7 +28,7 @@ export const TabMenu = ({ setMode, mode }) => {
         )}
         onClick={() => setMode("Bus")}
       >
-        Busses
+        Buses
       </button>
     </div>
   );

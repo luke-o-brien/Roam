@@ -6,6 +6,7 @@ import styles from "./ServiceStatus.module.scss";
 import { useRef } from "react";
 import { getServiceData } from "../../api/queries";
 import { useBannerHeight } from "../../utils/hooks/useBannerHeight";
+import { Loading } from "../../components/Loading/Loading";
 
 type LineStatus = {
   statusSeverity: number;
@@ -55,7 +56,7 @@ export const ServiceStatus: React.FC = () => {
           ></input>
         </div>
       )}
-      {isPending && <p>Loading...</p>}
+      {isPending && <Loading />}
       {isError && <p>Error fetching data</p>}
       {filteredLines?.length === 0 &&
         mode !== "Bus" &&
@@ -65,7 +66,7 @@ export const ServiceStatus: React.FC = () => {
             {mode === "River" ? (
               <p>All River services are running with a good service</p>
             ) : (
-              <p>Good service on all lines</p>
+              <p>There is a good service on all TFL lines</p>
             )}
           </div>
         )}
@@ -91,10 +92,14 @@ export const ServiceStatus: React.FC = () => {
             {!isPending ? (
               mode === "River" ? (
                 <p>Good Service on all other river services</p>
+              ) : mode === "Bus" &&
+                searchTerm !== "" &&
+                filteredLines.length === 0 ? (
+                <p>All routes matching {searchTerm} have a good service</p>
               ) : mode === "Bus" ? (
-                <p>Good Service on all other routes</p>
+                <p>There is a Good Service on all other bus routes</p>
               ) : (
-                <p>Good service on all other lines </p>
+                <p>There is a Good service on all other lines </p>
               )
             ) : (
               <></>
