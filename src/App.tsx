@@ -5,6 +5,7 @@ import { Home } from "./pages/Home/home";
 import { Header } from "./components/Header/header";
 import { ServiceStatus } from "./pages/ServiceStatus/ServiceStatus";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { JourneyPlanner } from "./pages/JourneyPlanner/JourneyPlanner";
 function App() {
   const [appTitle] = useState("service status");
   const queryClient = new QueryClient();
@@ -17,6 +18,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/servicestatus" element={<ServiceStatus />} />
+            <Route path="/JourneyPlanner" element={<JourneyPlanner />} />
+
           </Routes>
         </QueryClientProvider>
       </BrowserRouter>

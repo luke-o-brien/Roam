@@ -11,7 +11,7 @@ export const ButtonGrid: React.FC = () => {
       <HomepageTile
         buttonText="Plan a Journey"
         icon={<FontAwesomeIcon icon={faMap} className={styles.Icon} />}
-        url="/planjourney"
+        url="/JourneyPlanner"
       />
       <HomepageTile
         buttonText="Service update"
